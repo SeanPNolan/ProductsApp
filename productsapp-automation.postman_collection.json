@@ -110,8 +110,8 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:44368/api/products",
-					"protocol": "https",
+					"raw": "http://localhost:44368/api/products",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
@@ -135,9 +135,31 @@
 							" pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"response to be 400 OK\", function(){\r",
-							" pm.response.to.have.status(400);\r",
+							"var jsonData = JSON.parse(responseBody);\r",
+							"\r",
+							"pm.test(\"value of jsonData.Id to be 1\", function(){\r",
+							" pm.expect(1).to.equal(jsonData.Id)\r",
 							"});\r",
+							"\r",
+							"pm.test(\"value of jsonData.Name to be 'Tomato Soup'\", function(){\r",
+							" pm.expect(\"Tomato Soup\").to.equal(jsonData.Name)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"value of jsonData.Category to be 'Groceries'\", function(){\r",
+							" pm.expect(\"Groceries\").to.equal(jsonData.Category)\r",
+							"});\r",
+							"\r",
+							" pm.test(\"response to have an Id\", function(){\r",
+							" pm.response.to.have.jsonBody(\"Id\")\r",
+							"})\r",
+							"\r",
+							" pm.test(\"response to have an Name\", function(){\r",
+							" pm.response.to.have.jsonBody(\"Name\")\r",
+							"})\r",
+							"\r",
+							" pm.test(\"response to have an Category\", function(){\r",
+							" pm.response.to.have.jsonBody(\"Category\")\r",
+							"})\r",
 							""
 						],
 						"type": "text/javascript"
@@ -148,8 +170,8 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "https://localhost:44368/api/products/0",
-					"protocol": "https",
+					"raw": "http://localhost:44368/api/products/1",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
@@ -157,7 +179,7 @@
 					"path": [
 						"api",
 						"products",
-						"0"
+						"1"
 					]
 				}
 			},
